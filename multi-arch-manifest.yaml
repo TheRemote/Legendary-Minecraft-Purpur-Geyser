@@ -1,0 +1,24 @@
+image: 05jchambers/legendary-minecraft-purpur-geyser:latest
+manifests:
+  - image: 05jchambers/legendary-minecraft-purpur-geyser:amd64
+    platform:
+      architecture: amd64
+      os: linux
+  - image: 05jchambers/legendary-minecraft-purpur-geyser:armv7
+    platform:
+      architecture: arm
+      os: linux
+      variant: v7
+  - image: 05jchambers/legendary-minecraft-purpur-geyser:arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8
+  - image: 05jchambers/legendary-minecraft-purpur-geyser:ppc64le
+    platform:
+      architecture: ppc64le
+      os: linux
+  - image: 05jchambers/legendary-minecraft-purpur-geyser:s390x
+    platform:
+      architecture: s390x
+      os: linux
