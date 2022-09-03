@@ -1,6 +1,6 @@
 #!/bin/bash
 # Legendary Purpur Minecraft Java Server Docker + Geyser/Floodgate script by James A. Chambers - image build time
-# Author: James A. Chambers - https://jamesachambers.com/minecraft-java-bedrock-server-together-geyser-floodgate/
+# Author: James A. Chambers - https://jamesachambers.com/docker-minecraft-purpur-geyser-server/
 # GitHub Repository: https://github.com/TheRemote/Legendary-Minecraft-Purpur-Geyser
 
 Install_Java() {

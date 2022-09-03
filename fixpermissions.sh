@@ -1,6 +1,6 @@
 #!/bin/bash
 # Minecraft Server Docker Container Permissions Fix Script
-# Author: James A. Chambers - https://jamesachambers.com/minecraft-java-bedrock-server-together-geyser-floodgate/
+# Author: James A. Chambers - https://jamesachambers.com/docker-minecraft-purpur-geyser-server/
 # GitHub Repository: https://github.com/TheRemote/Legendary-Minecraft-Purpur-Geyser
 
 # Takes ownership of server files to fix common permission errors such as access denied
