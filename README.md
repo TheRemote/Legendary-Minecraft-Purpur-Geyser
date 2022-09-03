@@ -6,7 +6,7 @@ This is the Docker containerized version of my <a href="https://github.com/TheRe
 Geyser and Floodgate allow Minecraft Bedrock players to join your Java server!
 
 My <a href="https://jamesachambers.com/docker-minecraft-purpur-geyser-server/" target="_blank" rel="noopener">main blog article (and the best place for support) is here</a>.<br>
-The <a href="https://jamesachambers.com/docker-minecraft-purpur-geyser-server/" target="_blank" rel="noopener">Paper version with Floodgate and Geyser is here</a>.<br>
+The <a href="https://jamesachambers.com/minecraft-java-bedrock-server-together-geyser-floodgate/" target="_blank" rel="noopener">Paper version with Floodgate and Geyser is here</a>.<br>
 The <a href="https://jamesachambers.com/legendary-paper-minecraft-java-container/" target="_blank" rel="noopener">Paper version without Floodgate and Geyser is here</a>.<br>
 The <a href="https://github.com/TheRemote/Legendary-Minecraft-Purpur-Geyser" target="_blank" rel="noopener">official GitHub repository is located here</a>.<br>
 The <a href="https://hub.docker.com/r/05jchambers/legendary-minecraft-purpur-geyser" target="_blank" rel="noopener">official Docker Hub repository is located here</a>.<br>
