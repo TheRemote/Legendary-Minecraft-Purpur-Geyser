@@ -49,6 +49,9 @@ fi
 if [ ! -d "/minecraft/plugins/Geyser-Spigot" ]; then
     mkdir -p /minecraft/plugins/Geyser-Spigot
 fi
+if [ ! -d "/minecraft/config" ]; then
+    mkdir -p /minecraft/config
+fi
 
 # Check if network interfaces are up
 NetworkChecks=0
@@ -99,8 +102,11 @@ fi
 if [ ! -e "/minecraft/bukkit.yml" ]; then
     cp /scripts/bukkit.yml /minecraft/bukkit.yml
 fi
-if [ ! -e "/minecraft/paper.yml" ]; then
-    cp /scripts/paper.yml /minecraft/paper.yml
+if [ ! -e "/minecraft/purpur.yml" ]; then
+    cp /scripts/purpur.yml /minecraft/purpur.yml
+fi
+if [ ! -e "/minecraft/config/paper-global.yml" ]; then
+    cp /scripts/paper-global.yml /minecraft/config/paper-global.yml
 fi
 if [ ! -e "/minecraft/spigot.yml" ]; then
     cp /scripts/spigot.yml /minecraft/spigot.yml
