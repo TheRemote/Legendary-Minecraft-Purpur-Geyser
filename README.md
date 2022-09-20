@@ -133,6 +133,7 @@ See the following links:<br>
   <li>September 20th 2022</li>
     <ul>
       <li>Fix Geyser update link (thanks vp-en, <a href="https://github.com/TheRemote/Legendary-Minecraft-Purpur-Geyser/pull/2">PR #2</a>)</li>
+      <li>Update to OpenJDK 18.0.2.1</li>
     </ul>
   <li>September 2nd 2022</li>
     <ul>
