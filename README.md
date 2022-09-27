@@ -130,6 +130,10 @@ See the following links:<br>
 
 <h2>Update History</h2>
 <ul>
+  <li>September 27th 2022</li>
+    <ul>
+      <li>Fix SIGTERM catching in certain situations by running screen/java with the "exec" command which passes execution completely to that process (thanks vp-en, <a href="https://github.com/TheRemote/Legendary-Minecraft-Purpur-Geyser/issue/3">Issue #3</a>)</li>
+    </ul>
   <li>September 20th 2022</li>
     <ul>
       <li>Fix Geyser update link (thanks vp-en, <a href="https://github.com/TheRemote/Legendary-Minecraft-Purpur-Geyser/pull/2">PR #2</a>)</li>
