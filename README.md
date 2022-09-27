@@ -125,7 +125,7 @@ See the following links:<br>
 <ul>
   <li>September 27th 2022</li>
     <ul>
-      <li>Fix SIGTERM catching in certain situations by running screen/java with the "exec" command which passes execution completely to that process (thanks vp-en, <a href="https://github.com/TheRemote/Legendary-Minecraft-Purpur-Geyser/issue/3">Issue #3</a>)</li>
+      <li>Fix SIGTERM catching in certain situations by running java with the "exec" command which passes execution completely to that process (thanks vp-en, <a href="https://github.com/TheRemote/Legendary-Minecraft-Purpur-Geyser/issue/3">Issue #3</a>)</li>
       <li>Removed screen application</li>
     </ul>
   <li>September 20th 2022</li>
