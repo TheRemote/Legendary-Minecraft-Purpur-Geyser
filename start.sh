@@ -1,5 +1,5 @@
 #!/bin/bash
-# Legendary Purpur Minecraft Java Server Docker + Geyser/Floodgate server startup script using screen
+# Legendary Purpur Minecraft Java Server Docker + Geyser/Floodgate server
 # Author: James A. Chambers - https://jamesachambers.com/docker-minecraft-purpur-geyser-server/
 # GitHub Repository: https://github.com/TheRemote/Legendary-Minecraft-Purpur-Geyser
 
@@ -25,13 +25,6 @@ if [ -z "$BedrockPort" ]; then
     Port="19132"
 fi
 echo "Bedrock port used: $BedrockPort"
-
-# Check if server is already started
-ScreenWipe=$(screen -wipe 2>&1)
-if screen -list | grep -q "\.minecraft"; then
-    echo "Server is already started!  Press screen -r minecraft to open it"
-    exit 1
-fi
 
 # Change directory to server directory
 cd /minecraft
@@ -182,17 +175,10 @@ fi
 echo "Starting Minecraft server..."
 
 if [[ -z "$MaxMemory" ]] || [[ "$MaxMemory" -le 0 ]]; then
-    if [ -z "$NoScreen" ]; then
-        exec screen -L -Logfile /minecraft/logs/minecraft.$(date +%Y.%m.%d.%H.%M.%S).log -mS minecraft /jre/bin/java --add-modules=jdk.incubator.vector -XX:+UnlockDiagnosticVMOptions -XX:-UseAESCTRIntrinsics -DPaper.IgnoreJavaVersion=true -Xms400M -jar /minecraft/purpur.jar
-    else
-        echo "NoScreen switch present -- launching without screen (logging will be negatively impacted)"
-        exec /jre/bin/java --add-modules=jdk.incubator.vector -XX:+UnlockDiagnosticVMOptions -XX:-UseAESCTRIntrinsics -DPaper.IgnoreJavaVersion=true -Xms400M -jar /minecraft/purpur.jar
-    fi
+    exec /jre/bin/java --add-modules=jdk.incubator.vector -XX:+UnlockDiagnosticVMOptions -XX:-UseAESCTRIntrinsics -DPaper.IgnoreJavaVersion=true -Xms400M -jar /minecraft/purpur.jar
 else
-    if [ -z "$NoScreen" ]; then
-        exec screen -L -Logfile /minecraft/logs/minecraft.$(date +%Y.%m.%d.%H.%M.%S).log -mS minecraft /jre/bin/java --add-modules=jdk.incubator.vector -XX:+UnlockDiagnosticVMOptions -XX:-UseAESCTRIntrinsics -DPaper.IgnoreJavaVersion=true -Xms400M -Xmx${MaxMemory}M -jar /minecraft/purpur.jar
-    else
-        echo "NoScreen switch present -- launching without screen (logging will be negatively impacted)"
-        exec /jre/bin/java --add-modules=jdk.incubator.vector -XX:+UnlockDiagnosticVMOptions -XX:-UseAESCTRIntrinsics -DPaper.IgnoreJavaVersion=true -Xms400M -Xmx${MaxMemory}M -jar /minecraft/purpur.jar
-    fi
+    exec /jre/bin/java --add-modules=jdk.incubator.vector -XX:+UnlockDiagnosticVMOptions -XX:-UseAESCTRIntrinsics -DPaper.IgnoreJavaVersion=true -Xms400M -Xmx${MaxMemory}M -jar /minecraft/purpur.jar
 fi
+
+# Exit container
+exit 0
