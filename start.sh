@@ -29,10 +29,7 @@ echo "Bedrock port used: $BedrockPort"
 # Change directory to server directory
 cd /minecraft
 
-# Create logs/backups/downloads folder if it doesn't exist
-if [ ! -d "/minecraft/logs" ]; then
-    mkdir -p /minecraft/logs
-fi
+# Create folders if they don't exist
 if [ ! -d "/minecraft/downloads" ]; then
     mkdir -p /minecraft/downloads
 fi

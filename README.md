@@ -67,7 +67,6 @@ Most people will want to edit server.properties.  You can make the changes to th
 <br>
 Backups are stored in the "backups" folder<br>
 <br>
-Log files with timestamps are stored in the "logs" folder.<br>
 The Geyser configuration is located in plugins/Geyser-Spigot/config.yml<br>
 The Floodgate configuration is located in plugins/floodgate/config.yml<br>
 
