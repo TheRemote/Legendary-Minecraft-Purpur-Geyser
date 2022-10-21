@@ -44,8 +44,8 @@ Using a different timezone:
 <pre>docker run -it -v yourvolumename:/minecraft -p 25565:25565 -p 19132:19132/udp -p 19132:19132 -e TZ="America/Denver" --restart unless-stopped 05jchambers/legendary-minecraft-purpur-geyser:latest</pre>
 With a daily scheduled restart (specify time in 24 hour format):
 <pre>docker run -it -v yourvolumename:/minecraft -p 25565:25565 -p 19132:19132/udp -p 19132:19132 -e ScheduleRestart="3:30" --restart unless-stopped 05jchambers/legendary-minecraft-purpur-geyser:latest</pre>
-Skipping backups on a certain folder:
-<pre>docker run -it -v yourvolumename:/minecraft -p 25565:25565 -p 19132:19132/udp -p 19132:19132 -e NoBackup="plugins" --restart unless-stopped 05jchambers/legendary-minecraft-purpur-geyser:latest</pre>
+Skipping backups on certain folders (separate with comma):
+<pre>docker run -it -v yourvolumename:/minecraft -p 25565:25565 -p 19132:19132/udp -p 19132:19132 -e NoBackup="plugins/ftp,plugins/test2" --restart unless-stopped 05jchambers/legendary-minecraft-purpur-geyser:latest</pre>
 Skipping permissions check:
 <pre>docker run -it -v yourvolumename:/minecraft -p 25565:25565 -p 19132:19132/udp -p 19132:19132 -e NoPermCheck="Y" --restart unless-stopped 05jchambers/legendary-minecraft-purpur-geyser:latest</pre>
 
@@ -141,6 +141,10 @@ This can also be done non-persistently with the following ethtool command: <pre>
 
 <h2>Update History</h2>
 <ul>
+  <li>October 21st 2022</li>
+    <ul>
+      <li>NoBackup optional environment variable can now be multiple paths to files to skip backups on separated by a comma:  example:  plugins/test,plugins/test2</li>
+    </ul>
   <li>October 20th 2022</li>
     <ul>
       <li>Added new environment variable "NoBackup" to skip a folder from backup activities</li>
