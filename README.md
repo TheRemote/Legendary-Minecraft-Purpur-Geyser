@@ -143,7 +143,7 @@ This can also be done non-persistently with the following ethtool command: <pre>
 <ul>
   <li>October 21st 2022</li>
     <ul>
-      <li>NoBackup optional environment variable can now be multiple paths to files to skip backups on separated by a comma:  example:  plugins/test,plugins/test2</li>
+      <li>NoBackup optional environment variable can now be multiple paths to files to skip backups on separated by a comma.  Example:  plugins/test,plugins/test2</li>
     </ul>
   <li>October 20th 2022</li>
     <ul>
