@@ -77,11 +77,15 @@ The Geyser configuration is located in plugins/Geyser-Spigot/config.yml<br>
 The Floodgate configuration is located in plugins/floodgate/config.yml<br>
 
 <h2>TZ (timezone) Environment Variable</h2>
-You can change the timezone from the default "America/Denver" to own timezone using this environment variable: <pre>docker run -it -v yourvolumename:/minecraft -p 25565:25565 -p 19132:19132/udp -p 19132:19132 -e TZ="America/Denver" --restart unless-stopped 05jchambers/legendary-minecraft-purpur-geyser:latest</pre>
+You can change the timezone from the default "America/Denver" to own timezone using this environment variable: <pre>docker run -it -v yourvolumename:/minecraft -p 25565:25565 -p 19132:19132/udp -p 19132:19132 -e TZ="America/Denver" 05jchambers/legendary-minecraft-purpur-geyser:latest</pre>
 A <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">list of Linux timezones is available here</a>
 
 <h2>BackupCount Environment Variable</h2>
-By default the server keeps 10 rolling backups that occur each time the container restarts.  You can override this using the BackupCount environment variable:<pre>docker run -it -v yourvolumename:/minecraft -p 25565:25565 -p 19132:19132/udp -p 19132:19132 -e BackupCount=20 --restart unless-stopped 05jchambers/legendary-minecraft-purpur-geyser:latest</pre>
+By default the server keeps 10 rolling backups that occur each time the container restarts.  You can override this using the BackupCount environment variable:<pre>docker run -it -v yourvolumename:/minecraft -p 25565:25565 -p 19132:19132/udp -p 19132:19132 -e BackupCount=20 05jchambers/legendary-minecraft-purpur-geyser:latest</pre>
+
+<h2>QuietCurl Environment Variable</h2>
+You can use the QuietCurl environment variable to suppress curl's download output.  This will keep your logs tidier but may make it harder to diagnose if something is going wrong.  If things are working well it's safe to enable this option and turn it back off so you can see the output if you need to:<pre>docker run -it -v yourvolumename:/minecraft -p 25565:25565 -p 19132:19132/udp -p 19132:19132 -e QuietCurl=Y 05jchambers/legendary-minecraft-purpur-geyser:latest</pre>
+
 
 <h2>Plugins</h2>
 This is a "Purpur" Minecraft server which has plugin compatibility with Purpur / Paper / Spigot / Bukkit.<br>
@@ -144,6 +148,11 @@ This can also be done non-persistently with the following ethtool command: <pre>
 
 <h2>Update History</h2>
 <ul>
+  <li>November 19th 2022</li>
+    <ul>
+      <li>Add "QuietCurl" environment variable which will suppress the progress meter on curl keeping the logs much tidier</li>
+      <li>Remove fixpermissions.sh and add 3 lines into main start.sh file</li>
+    </ul>
   <li>November 7th 2022</li>
     <ul>
       <li>Fail immediately if ran without an interactive terminal (as the Minecraft server won't work without one)</li>
