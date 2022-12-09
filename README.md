@@ -148,6 +148,10 @@ This can also be done non-persistently with the following ethtool command: <pre>
 
 <h2>Update History</h2>
 <ul>
+  <li>December 9th 2022</li>
+    <ul>
+      <li>Update to Purpur 1.19.3 (make sure you have backups)</li>
+    </ul>
   <li>November 19th 2022</li>
     <ul>
       <li>Add "QuietCurl" environment variable which will suppress the progress meter on curl keeping the logs much tidier</li>
