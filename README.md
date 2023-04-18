@@ -146,6 +146,10 @@ This can also be done non-persistently with the following ethtool command: <pre>
 
 <h2>Update History</h2>
 <ul>
+  <li>April 18th 2023</li>
+    <ul>
+      <li>Add NoViaVersion environment variable to disable using ViaVersion in case of incompatible plugins</li>
+    </ul>
   <li>March 18th 2023</li>
     <ul>
       <li>Upgrade to Purpur 1.19.4</li>
