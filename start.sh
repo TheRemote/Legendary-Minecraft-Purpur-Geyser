@@ -143,7 +143,7 @@ if [ "$?" != 0 ]; then
 else
     # Get latest build
     BuildJSON=$(curl --no-progress-meter -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" https://api.purpurmc.org/v2/purpur/$Version)
-    Build=$(echo "$BuildJSON" | cut -d':' -f4 | cut -d'"' -f2)
+    Build=$(echo "$BuildJSON" | cut -d':' -f5 | cut -d'"' -f2)
     Build=$(($Build + 0))
     if [[ $Build != 0 ]]; then
         echo "Latest Purpur build found: $Build"
