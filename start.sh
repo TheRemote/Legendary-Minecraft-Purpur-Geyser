@@ -3,6 +3,20 @@
 # Author: James A. Chambers - https://jamesachambers.com/docker-minecraft-purpur-geyser-server/
 # GitHub Repository: https://github.com/TheRemote/Legendary-Minecraft-Purpur-Geyser
 
+# If running as root, create 'minecraft' user and restart script as 'minecraft' user
+if [ "$(id -u)" = '0' ]; then
+    echo "Script is running as root, switching to 'minecraft' user..."
+
+    if ! id minecraft >/dev/null 2>&1; then
+        echo "Creating 'minecraft' user..."
+        useradd -m -r -s /bin/bash minecraft
+    fi
+
+    chown -R minecraft:minecraft /minecraft
+
+    exec su minecraft -c "$0 $@"
+fi
+
 echo "Purpur Minecraft Java Server Docker + Geyser/Floodgate script by James A. Chambers"
 echo "Latest version always at https://github.com/TheRemote/Legendary-Minecraft-Purpur-Geyser"
 echo "Don't forget to set up port forwarding on your router!  The default port is 25565 and the Bedrock port is 19132"
@@ -174,7 +188,7 @@ else
 
     if [ -z "$NoViaVersion" ]; then
         # Update ViaVersion if new version is available
-        ViaVersionVersion=$(curl --no-progress-meter -k -L -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" https://ci.viaversion.com/job/ViaVersion/lastBuild/artifact/build/libs/ | grep 'href="ViaVersion' | cut -d'"' -f2)
+        ViaVersionVersion=$(curl --no-progress-meter -k -L -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" https://ci.viaversion.com/job/ViaVersion/lastBuild/artifact/build/libs/ | grep -P '(?<=href=")ViaVersion[^"]+' -o --max-count=1 | head -n1)
         if [ -n "$ViaVersionVersion" ]; then
             ViaVersionMD5=$(curl --no-progress-meter -k -L -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" "https://ci.viaversion.com/job/ViaVersion/lastBuild/artifact/build/libs/$ViaVersionVersion/*fingerprint*/" | grep breadcrumbs | cut -d'_' -f24- | cut -d'<' -f2 | cut -d'>' -f2)
             if [ -n "$ViaVersionMD5" ]; then
