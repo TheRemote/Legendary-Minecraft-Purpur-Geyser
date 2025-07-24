@@ -148,6 +148,10 @@ This can also be done non-persistently with the following ethtool command: <pre>
 <ul>
   <li>February 8th 2025</li>
     <ul>
+      <li>Updated default version to 1.21.8 (remember, you never need to wait for updates to change Minecraft versions, just use -e Version=1.21.8)</li>
+    </ul>
+  <li>February 8th 2025</li>
+    <ul>
       <li>Updated default version to 1.21.4 (remember, you never need to wait for updates to change Minecraft versions, just use -e Version=1.21.4)</li>
     </ul>
   <li>December 1st 2024</li>
