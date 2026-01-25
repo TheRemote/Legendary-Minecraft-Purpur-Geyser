@@ -146,6 +146,11 @@ This can also be done non-persistently with the following ethtool command: <pre>
 
 <h2>Update History</h2>
 <ul>
+  <li>January 25th 2026</li>
+    <ul>
+      <li>Update to 1.21.11</li>
+      <li>Implement fixes to ViaVersion</li>
+    </ul>
   <li>July 26th 2025</li>
     <ul>
       <li>Updated build process to use buildx for multi-arch builds</li>

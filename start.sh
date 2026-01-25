@@ -187,21 +187,30 @@ else
     fi
 
     if [ -z "$NoViaVersion" ]; then
-        # Update ViaVersion if new version is available
-        ViaVersionVersion=$(curl --no-progress-meter -k -L -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" https://ci.viaversion.com/job/ViaVersion/lastBuild/artifact/build/libs/ | grep -P '(?<=href=")ViaVersion[^"]+' -o --max-count=1 | head -n1)
-        if [ -n "$ViaVersionVersion" ]; then
-            ViaVersionMD5=$(curl --no-progress-meter -k -L -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" "https://ci.viaversion.com/job/ViaVersion/lastBuild/artifact/build/libs/$ViaVersionVersion/*fingerprint*/" | grep breadcrumbs | cut -d'_' -f24- | cut -d'<' -f2 | cut -d'>' -f2)
-            if [ -n "$ViaVersionMD5" ]; then
-                LocalMD5=$(md5sum plugins/ViaVersion.jar | cut -d' ' -f1)
-                if [ -e /minecraft/plugins/ViaVersion.jar ] && [ "$LocalMD5" = "$ViaVersionMD5" ]; then
-                    echo "ViaVersion is up to date"
+        if [ -n "$ViaVersionSnapshot" ]; then
+            # Update ViaVersion from Jenkins CI (snapshot/dev versions)
+            echo "Updating ViaVersion from Jenkins CI (snapshot)..."
+            ViaVersionVersion=$(curl -s -k -L "https://ci.viaversion.com/job/ViaVersion/lastBuild/artifact/build/libs/" | grep -oE 'href="ViaVersion[^"]+' | head -1 | sed 's/href="//')
+            if [ -n "$ViaVersionVersion" ]; then
+                echo "Found ViaVersion: $ViaVersionVersion"
+                if [ -z "$QuietCurl" ]; then
+                    curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" -o /minecraft/plugins/ViaVersion.jar "https://ci.viaversion.com/job/ViaVersion/lastBuild/artifact/build/libs/$ViaVersionVersion"
                 else
-                    echo "Updating ViaVersion..."
-                    if [ -z "$QuietCurl" ]; then
-                        curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" -o /minecraft/plugins/ViaVersion.jar "https://ci.viaversion.com/job/ViaVersion/lastBuild/artifact/build/libs/$ViaVersionVersion"
-                    else
-                        curl --no-progress-meter -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" -o /minecraft/plugins/ViaVersion.jar "https://ci.viaversion.com/job/ViaVersion/lastBuild/artifact/build/libs/$ViaVersionVersion"
-                    fi
+                    curl --no-progress-meter -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" -o /minecraft/plugins/ViaVersion.jar "https://ci.viaversion.com/job/ViaVersion/lastBuild/artifact/build/libs/$ViaVersionVersion"
+                fi
+            else
+                echo "Unable to check for updates to ViaVersion!"
+            fi
+        else
+            # Update ViaVersion from GitHub Releases (stable versions) - default
+            ViaVersionURL=$(curl -s "https://api.github.com/repos/ViaVersion/ViaVersion/releases/latest" | jq -r '.assets[0].browser_download_url' 2>/dev/null)
+            if [[ -n "$ViaVersionURL" && "$ViaVersionURL" != "null" ]]; then
+                ViaVersionTag=$(curl -s "https://api.github.com/repos/ViaVersion/ViaVersion/releases/latest" | jq -r '.tag_name' 2>/dev/null)
+                echo "Updating ViaVersion to $ViaVersionTag..."
+                if [ -z "$QuietCurl" ]; then
+                    curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" -o /minecraft/plugins/ViaVersion.jar "$ViaVersionURL"
+                else
+                    curl --no-progress-meter -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4.212 Safari/537.36" -o /minecraft/plugins/ViaVersion.jar "$ViaVersionURL"
                 fi
             else
                 echo "Unable to check for updates to ViaVersion!"
